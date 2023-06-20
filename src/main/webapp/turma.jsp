@@ -43,6 +43,7 @@ ArrayList<JavaBeans> lista = (ArrayList<JavaBeans>) request.getAttribute("turmas
 			<%} %>
 		</tbody>
 	</table>
+	<a href="index.html" class= "voltar">voltar</a>
 	<script src="scripts/confirmador.js"></script>
 </body>
 </html>

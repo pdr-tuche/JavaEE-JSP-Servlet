@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>novo aluno</title>
+<link rel="icon" href="imagens/student.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Criar novo aluno</h1>
+	<form name="formAluno" action="insertAluno">
+		<table>
+			<tr>
+				<td><input type="text" name="nome" placeholder="nome do aluno"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="turma"
+					placeholder="turma do aluno"></td>
+			</tr>
+		</table>
+		<input class="Botao1" type="button" value="adicionar" onclick="validar()">
+	</form>
+	<script src="scripts/validadorAluno.js"></script>
+</body>
+</html>

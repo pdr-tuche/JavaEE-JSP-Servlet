@@ -127,5 +127,105 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
+	
+	
+	
+	
+	
+	
+	//inicio metodos de aluno
+	public void inserirAluno(Aluno aluno) {
+		String create = "insert into aluno (nome, turma_id) values (?,?)";
+		try {
+			// abrir conexao
+			Connection con = conectar();
+			// preparar query para execucao no db
+			PreparedStatement pst = con.prepareStatement(create);
+			// substituindo parametros (?) pelo conteudo do java bens
+			pst.setString(1, aluno.getNome());
+			pst.setInt(2, aluno.getTurma());
+			// executantdo query
+			pst.executeUpdate(); // comando que insere no db
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	
+	public ArrayList<Aluno> listarAlunos() {
+		// criando um obj para acessar a classe javabens
+		ArrayList<Aluno> alunos = new ArrayList<>();
+		String read = "select * from aluno order by nome";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(read);
+			ResultSet rs = pst.executeQuery(); // result set faz parte do jdbc e usado para guardar o retorno do db
+												// temporariamente
+			// laço executado enquanto houver turmas
+			while (rs.next()) {
+				// variaveis de apoio que recevem daddos do banco
+				int id = rs.getInt(1);
+				String nome = rs.getString(2);
+				int turma = rs.getInt(3);
+				// populando o arraylist
+				alunos.add(new Aluno(id, nome, turma));
+			}
+			con.close();
+			return alunos;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
+	
+	public void selecionarAluno(Aluno aluno) {
+		String read2 = "select * from aluno where matricula = ?";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(read2);
+			pst.setInt(1, aluno.getMatricula());
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				aluno.setMatricula(rs.getInt(1));
+				aluno.setNome(rs.getString(2));
+				aluno.setTurma(rs.getInt(3));
+			}
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void alterarAluno (Aluno aluno) {
+		String create = "update aluno set nome=?, turma_id=? where matricula = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(create);
+			pst.setString(1, aluno.getNome());
+			pst.setInt(2, aluno.getTurma());
+			pst.setInt(3, aluno.getMatricula());
+			pst.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	
+	public void deletarAluno(Aluno aluno) {
+		String delete = "delete from aluno where matricula = ?";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(delete);
+			pst.setInt(1, aluno.getMatricula());
+			pst.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
 }
