@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>nova turma</title>
+<link rel="icon" href="imagens/student.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Criar nova turma</h1>
+	<form name="formTurma" action="insert">
+		<table>
+			<tr>
+				<td><input type="text" name="nome" placeholder="nome da turma"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="turno"
+					placeholder="turno da turma"></td>
+			</tr>
+		</table>
+		<input class="Botao1" type="button" value="adicionar" onclick="validar()">
+	</form>
+	<script src="scripts/validador.js"></script>
+</body>
+</html>
